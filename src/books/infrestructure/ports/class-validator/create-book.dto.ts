@@ -22,12 +22,40 @@ export class CreateBookDto implements CreateBookDTOI {
   autor: string;
 
   @ApiProperty({
-    description: 'Estado del libro (ej. "Leído", "Por leer", "Leyendo")',
-    example: 'Leído',
+    description: 'Fecha de publicación del libro',
+    example: '14-05-1943',
   })
   @IsString()
   @IsNotEmpty()
-  status: string;
+  fecha_publicacion: Date;
+
+  @ApiProperty({ 
+    description: 'Categoria del libro: Terror, fantasia',
+    example: 'Fantasía',
+   })
+  @IsString()
+  categoria: string;
+
+  @ApiProperty({
+    description: 'Descripcion del libro (resumen)',
+    example: 'Un piloto se estrella en el desierto del Sahara y conoce a un joven príncipe de otro planeta. El príncipe comparte sus experiencias y sabiduría, ofreciendo una perspectiva única sobre la vida y las relaciones.'
+  })
+  @IsString()
+  descripcion: string
+
+  @ApiProperty({
+    description: 'cantidad de libros que hay',
+    example: 40
+  })
+  @IsNumber()
+  cantidad: number;
+
+  @ApiProperty({
+    description: "Ubicacion donde se encuetra el libro",
+    example: 'Estante 3A, piso 2'
+  })
+  @IsString()
+  ubicacion: string;
 
   @ApiProperty({
     description: 'URL de la imagen del libro',
@@ -38,15 +66,6 @@ export class CreateBookDto implements CreateBookDTOI {
   @IsString()
   imagen_url?: string;
 
-  @ApiProperty({ 
-    description: 'Notas sobre el libro',
-    example: 'Un libro fascinante sobre la vida y la amistad.',
-    required: false,
-   })
-  @IsOptional()
-  @IsString()
-  @MaxLength(255)
-  notes?: string;
 
   @ApiProperty({
     description: 'ID del usuario que creó el libro',

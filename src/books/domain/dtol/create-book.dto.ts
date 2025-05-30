@@ -1,8 +1,11 @@
 export interface CreateBookDTOI {
     titulo: string;
     autor: string;
-    status: string;
+    fecha_publicacion: Date;
+    categoria: string;
+    descripcion: string;
+    cantidad: number;
+    ubicacion: string;
     imagen_url?: string;
-    notes?: string;
     id_user?: string;
 }

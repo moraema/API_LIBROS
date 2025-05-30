@@ -13,13 +13,22 @@ export class Book implements BookI {
     autor: string;
 
     @Column({ nullable: false, type: 'varchar', length: 255 })
-    status: string;
+    fecha_publicacion: Date;
 
     @Column({ nullable: true, type: 'varchar', length: 255 })
-    imagen_url?: string;
+    categoria: string;
 
-    @Column({  nullable: true, type: 'varchar', length: 255 })
-    notes?: string;
+    @Column({ nullable: true, type: 'varchar', length: 255 })
+    descripcion: string;
+
+    @Column({ nullable: true, type: 'int' })
+    cantidad: number;
+
+    @Column({ nullable: true, type: 'varchar', length: 255 })
+    ubicacion: string; 
+    
+    @Column({ nullable: true, type: 'varchar', length: 255 })
+    imagen_url?: string;
 
     @Column({  nullable: true, type: 'varchar', length: 255 })
     id_user?: string;

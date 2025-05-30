@@ -6,6 +6,7 @@ import { Repository } from "typeorm";
 import { CreateBookDTOI } from "src/books/domain/dtol/create-book.dto";
 import { BookI } from "src/books/domain/entities/books";
 import { UpdateBookDTOI } from "src/books/domain/dtol/update-book.dto";
+import { UpdateQuantityDTOI } from "src/books/domain/dtol/update-quantity.dto";
 
 @Injectable()
 export class BookRepositoryImpl implements BookRepositoryI {
@@ -69,5 +70,19 @@ export class BookRepositoryImpl implements BookRepositoryI {
         }
     }
 
+    async updateQuantity(updateData: { id: string, cantidad: number }): Promise<BookI> {
+        try {
+            const existingBook = await this.bookRepository.findOneBy({ id: updateData.id });
+            if (!existingBook) {
+                throw new Error('Libro no encontrado');
+            }
+
+            existingBook.cantidad = updateData.cantidad;
+            const res = await this.bookRepository.save(existingBook);
+            return res;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
 
 }

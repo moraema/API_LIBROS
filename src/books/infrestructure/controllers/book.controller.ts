@@ -3,6 +3,7 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagg
 import { BookService } from "src/books/application/service/book.service";
 import { CreateBookDto } from "../ports/class-validator/create-book.dto";
 import { UpdateBookDto } from "../ports/class-validator/update-book.dto";
+import { UpdateQuantityDto } from "../ports/class-validator/update-quantity.dto";
 import { SecurityModule } from "src/share/security/infrestructure/security.module";
 import { SecurityGuard } from "src/share/security/application/guards/security.guard";
 
@@ -54,6 +55,19 @@ export class BookController {
         return this.bookService.update(id, updateBookDto);
     }
 
+    @Patch('quantity/:id')
+    @ApiResponse({ status: HttpStatus.OK, description: 'Cantidad de libros actualizada exitosamente' })
+    @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Libro no encontrado' })
+    @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Datos inválidos' })
+    @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: 'No autorizado'})
+    @ApiOperation({ summary: 'Actualizar cantidad de libros'})
+    updateQuantity(
+        @Param('id', ParseUUIDPipe) id: string,
+        @Body() updateQuantityDto: UpdateQuantityDto,
+    ) {
+        return this.bookService.updateQuantity(id, updateQuantityDto);
+    } 
+    
     @Delete(':id')
     @ApiResponse({ status: HttpStatus.OK, description: 'Libro elimiando exitosamente' })
     @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Libro no encontrado' })
@@ -62,4 +76,5 @@ export class BookController {
     remove(@Param('id', ParseUUIDPipe) id: string) {
         return this.bookService.remove(id);
     }
+
 }
