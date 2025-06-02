@@ -13,6 +13,7 @@ export class UsersController {
    ) {}
 
    @Post('login')
+   @HttpCode(200)
    @ApiOperation({ summary: 'Iniciar sesión', description: 'Autentica al usuario y devulve el token JWT'})
    @ApiResponse({ 
     status: HttpStatus.OK, 
@@ -32,7 +33,7 @@ export class UsersController {
 
    @Post('register')
    @ApiOperation({ summary: 'Registrar un nuevo usuario' })
-   @ApiResponse({ status: HttpStatus.CREATED, description: 'Libro creado exitosamente' })
+   @ApiResponse({ status: HttpStatus.CREATED, description: 'Usuario registrado exitosamente' })
    @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Datos inválidos' })
    @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: 'No autorizado'})
     createUser(@Body() createUser: CreateUserDto) {

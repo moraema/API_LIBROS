@@ -27,7 +27,7 @@ export class Book implements BookI {
     @Column({ nullable: true, type: 'varchar', length: 255 })
     ubicacion: string; 
     
-    @Column({ nullable: true, type: 'varchar', length: 255 })
+    @Column({ nullable: true, type: 'text' })
     imagen_url?: string;
 
     @Column({  nullable: true, type: 'varchar', length: 255 })
